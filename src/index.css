@@ -1,13 +1,63 @@
-body {
+body, input, button {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  font-family: "Gaegu", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+  color: #FFF5E8;
+  background-color: #113537;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+h1 {
+  font-size: 50px;
+  font-family: "Gluten", serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+  font-variation-settings:
+    "slnt" 0;
+}
+
+ul {
+  text-align: left;
+}
+
+input {
+  color: black;
+}
+
+.task-field {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 20px;
+  border-radius: 5px;
+}
+
+.task-input {
+  padding: 8px;
+  border: 1px solid #FFEAD0;
+  border-radius: 5px;
+  outline: none;
+  width: 200px;
+  background-color: #FFF5E8;
+}
+
+.add-button {
+  padding: 8px 12px;
+  background-color: #37505C;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.add-button:hover {
+  background-color: #96616B;
+}
+
+a {
+  background-color: #96616B;
 }
