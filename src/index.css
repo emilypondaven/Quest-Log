@@ -5,16 +5,24 @@
   --darker-green: #37505C;
 }
 
-body, input, button {
+body {
   margin: 0;
+  color: var(--white);
+  background-color: var(--dark-green);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+body, input, button {
   text-align: center;
   font-family: "Gaegu", serif;
   font-weight: 400;
   font-style: normal;
   font-size: 20px;
-  color: var(--white);
-  background-color: var(--dark-green);
 }
+
 
 h1 {
   font-size: 50px;
@@ -31,6 +39,27 @@ ul {
   padding: 0;
   margin: 0 auto;
   text-align: left;
+  overflow-y: auto;
+  flex-grow: 1;
+  max-height: 300px;
+}
+
+/* Customize the scrollbar width and appearance */
+ul::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+ul::-webkit-scrollbar-track {
+  background: var(--dark-green); /* Color of the track (background) */
+}
+
+ul::-webkit-scrollbar-thumb {
+  background: var(--darker-green); /* Color of the scrollbar thumb (handle) */
+  border-radius: 10px; /* Rounded corners for the thumb */
+}
+
+ul::-webkit-scrollbar-thumb:hover {
+  background: var(--pink); /* Color when hovering over the scrollbar */
 }
 
 li {

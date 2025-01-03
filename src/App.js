@@ -8,9 +8,12 @@ function App() {
     <div className="App">
       <header className="App-main">
         <NavBar />
-        <h1>Daily To-do List</h1>
 
-        <TaskList />
+        <div className="todo-container">
+          <h1>Daily To-do List</h1>
+
+          <TaskList />
+        </div>
       </header>
     </div>
   );

@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+
 function TaskList() {
     const [tasks, setTasks] = useState([
         "Spanish Duoliungo Lesson",
@@ -6,18 +8,46 @@ function TaskList() {
         "Reading book (Philosophy, Fiction)"
     ]);
 
+    const [newTask, setNewTask] = useState("");
+
+    // Function to handle adding a new task
+    const addTask = () => {
+        if (newTask.trim()) {
+            console.log("ghg");
+            setTasks([...tasks, newTask]);
+            setNewTask("");
+        }
+    };
+
+    const handleInputChange = (event) => {
+        setNewTask(event.target.value);
+    }
+
+    const handleKeyDown = (event) => {
+        if (event.key === "Enter") {
+            addTask();
+        }
+    };
+
     return (
         <div>
-            <div class="task-field">
-                <input class="task-input" placeholder="Enter task here" />
-                <button class="add-button">Add</button>
+            <div className="task-field">
+                <input 
+                    className="task-input" 
+                    placeholder="Enter task here"
+                    value={newTask}
+                    onChange={handleInputChange}
+                    onKeyDown={handleKeyDown}
+                />
+                <button className="add-button" onClick={addTask}>
+                    Add
+                </button>
             </div>
 
             <ul>
-                <li>Spanish Duolingo Lesson</li>
-                <li>Coding project (GitHub repo push request)</li>
-                <li>Game of Chess</li>
-                <li>Reading book (Philosophy, Fiction)</li>
+                {tasks.map((task, index) => (
+                    <li key={index}>{task}</li>
+                ))}
             </ul>
         </div>
     )
