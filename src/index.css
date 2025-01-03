@@ -23,7 +23,6 @@ body, input, button {
   font-size: 20px;
 }
 
-
 h1 {
   font-size: 50px;
   font-family: "Gluten", serif;
@@ -142,7 +141,7 @@ input {
   background-color: var(--white);
 }
 
-.add-button {
+button {
   padding: 8px 12px;
   background-color: var(--darker-green);
   border: none;
@@ -151,7 +150,7 @@ input {
   transition: background-color 0.3s;
 }
 
-.add-button:hover {
+button:hover {
   background-color: var(--pink);
 }
 
@@ -179,4 +178,15 @@ nav a {
 
 nav a:hover {
   color: var(--pink);
+}
+
+#sprite-button {
+  position: fixed;     
+  top: 70px;
+  right: 20px;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  color: var(--white);
+  cursor: pointer;
 }

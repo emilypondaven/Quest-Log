@@ -32,5 +32,18 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 
 # Features to add
-- Add the cat walking at the bottom of the screen
-- Add navigation bar functionality
+Deployment:
+- Render
+Backend: 
+- Node.js with Express:
+    - Saving a password at the start
+    - Storage of data (managed database) - MongoDB??
+Frontend:
+- React
+- To-do list:
+    - Add navigation bar functionality
+    - Add button to choose between cat and dog animation
+
+Today:
+- Fix button to choose between cat and dog
+- Navigation functionality (create new page)

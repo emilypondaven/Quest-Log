@@ -1,14 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react';
-import walkingSprite from '../assets/Walk.png';
-import idleSprite from '../assets/Idle.png';
 
-function SpriteAnimation() {
+// Images
+import catWalkingSprite from '../assets/CatWalk.png';
+import catIdleSprite from '../assets/CatIdle.png';
+import dogWalkingSprite from '../assets/DogWalk.png';
+import dogIdleSprite from '../assets/DogIdle.png';
+
+function SpriteAnimation({ isCatSprite }) {
     const [currentFrame, setCurrentFrame] = useState(0);
     const [positionX, setPositionX] = useState(0);
     const [isIdle, setIsIdle] = useState(false);
     const [hasIdled, setHasIdled] = useState(false);
     const [stopPosition, setStopPosition] = useState(window.innerWidth / 2);
     const canvasRef = useRef(null);
+
+    // Choice of sprite type: dog or cat
+    const walkingSprite = isCatSprite ? catWalkingSprite : dogWalkingSprite;
+    const idleSprite = isCatSprite ? catIdleSprite : dogIdleSprite;
 
     // Walking sprite image
     const walkingImage = new Image();
@@ -81,7 +89,7 @@ function SpriteAnimation() {
                     // Upate the position of the sprite when moving
                     return prevPosition + 5;
                 });
-            }, 30);
+            }, 50);
 
             return () => clearInterval(moveInterval);
         }
