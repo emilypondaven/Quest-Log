@@ -190,3 +190,14 @@ nav a:hover {
   color: var(--white);
   cursor: pointer;
 }
+
+/* Adjust button position for smaller screen sizes */
+@media screen and (max-width: 575px) {
+  ul {
+    max-height: 200px;
+  }
+  
+  #sprite-button {
+    top: 100px;
+  }
+}
