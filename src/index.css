@@ -70,6 +70,54 @@ li:hover {
   color: var(--pink);
 }
 
+
+input[type="checkbox"] {
+  /* Hide the default checkbox */
+  appearance: none; 
+  -webkit-appearance: none; 
+  -moz-appearance: none; 
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--white); /* White border */
+  border-radius: 5px; /* Rounded corners */
+  background-color: var(--dark-green); /* Green background */
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  margin-right: 20px; /* Space between checkbox and text */
+  vertical-align: middle;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+/* When checkbox is checked */
+input[type="checkbox"]:checked {
+  background-color: var(--pink); /* Pink background when checked */
+  border-color: var(--pink); /* Pink border when checked */
+}
+
+/* Create a checkmark with ::after */
+input[type="checkbox"]:checked::after {
+  content: '✔'; /* The checkmark symbol */
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%) translateY(-10%);
+  color: white;
+  font-size: 14px;
+}
+
+/* Hover effect on the checkbox */
+input[type="checkbox"]:hover {
+  border-color: var(--pink); /* Change border color on hover */
+}
+
+/* Checkbox when it's disabled */
+input[type="checkbox"]:disabled {
+  background-color: #f0f0f0; /* Light gray */
+  border-color: #ccc; /* Gray border */
+  cursor: not-allowed; /* Disable hover effect */
+}
+
 input {
   color: black;
 }

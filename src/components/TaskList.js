@@ -2,10 +2,10 @@ import React, { useState } from "react";
 
 function TaskList() {
     const [tasks, setTasks] = useState([
-        "Spanish Duoliungo Lesson",
-        "Coding Project (GitHub repo push request)",
-        "Game of Chess",
-        "Reading book (Philosophy, Fiction)"
+        { text: "Spanish Duoliungo Lesson", isChecked: false },
+        { text: "Coding Project (GitHub repo push request)", isChecked: false },
+        { text: "Game of Chess", isChecked: false },
+        { text: "Reading book (Philosophy, Fiction)", isChecked: false }
     ]);
 
     const [newTask, setNewTask] = useState("");
@@ -13,11 +13,26 @@ function TaskList() {
     // Function to handle adding a new task
     const addTask = () => {
         if (newTask.trim()) {
-            console.log("ghg");
-            setTasks([...tasks, newTask]);
-            setNewTask("");
+            // Check if any task's text includes the inputted text
+            const taskExists = tasks.some(task => task.text.toLowerCase().includes(newTask.toLowerCase()));
+
+            if (!taskExists) {
+                const newTaskObject = { text: newTask, isChecked: false };
+                setTasks([...tasks, newTaskObject]);
+                setNewTask("");
+            }
         }
     };
+
+    const toggleTaskCompletion = (index) => {
+        const updatedTasks = tasks.map((task, taskIndex) => {
+            if (taskIndex === index) {
+                return { ...task, isChecked: !task.isChecked };
+            }
+            return task;
+        });
+        setTasks(updatedTasks);
+    }
 
     const handleInputChange = (event) => {
         setNewTask(event.target.value);
@@ -46,7 +61,14 @@ function TaskList() {
 
             <ul>
                 {tasks.map((task, index) => (
-                    <li key={index}>{task}</li>
+                    <li key={index} style={{ textDecoration: task.isChecked ? 'line-through' : 'none' }}>
+                        <input
+                            type="checkbox"
+                            checked={task.isChecked}
+                            onChange={() => toggleTaskCompletion(index)} // Toggle checkbox state
+                        />
+                        {task.text}
+                    </li>
                 ))}
             </ul>
         </div>
