@@ -14,7 +14,7 @@ function TaskList() {
     const addTask = () => {
         if (newTask.trim()) {
             // Check if any task's text includes the inputted text
-            const taskExists = tasks.some(task => task.text.toLowerCase().includes(newTask.toLowerCase()));
+            const taskExists = tasks.some(task => task.text.toLowerCase() == newTask.toLowerCase());
 
             if (!taskExists) {
                 const newTaskObject = { text: newTask, isChecked: false };
