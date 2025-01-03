@@ -35,8 +35,10 @@ function TaskList() {
     }
 
     const deleteTask = (index) => {
+        const taskToDelete = tasks[index].text;
         const updatedTasks = tasks.filter((task, taskIndex) => taskIndex !== index);
         setTasks(updatedTasks);
+        setNewTask(taskToDelete);
     }
 
     const handleInputChange = (event) => {
