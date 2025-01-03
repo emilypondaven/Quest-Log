@@ -1,3 +1,10 @@
+:root {
+  --pink: #96616B;
+  --white: #E9CFAC;
+  --dark-green: #113537;
+  --darker-green: #37505C;
+}
+
 body, input, button {
   margin: 0;
   text-align: center;
@@ -5,8 +12,8 @@ body, input, button {
   font-weight: 400;
   font-style: normal;
   font-size: 20px;
-  color: #FFF5E8;
-  background-color: #113537;
+  color: var(--white);
+  background-color: var(--dark-green);
 }
 
 h1 {
@@ -20,7 +27,18 @@ h1 {
 }
 
 ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
   text-align: left;
+}
+
+li {
+  padding: 10px;
+}
+
+li:hover {
+  color: var(--pink);
 }
 
 input {
@@ -29,25 +47,27 @@ input {
 
 .task-field {
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 20px;
   font-size: 20px;
   border-radius: 5px;
+  margin: 20px auto;
+
 }
 
 .task-input {
   padding: 8px;
-  border: 1px solid #FFEAD0;
+  border: 1px solid var(--white);
   border-radius: 5px;
   outline: none;
   width: 200px;
-  background-color: #FFF5E8;
+  background-color: var(--white);
 }
 
 .add-button {
   padding: 8px 12px;
-  background-color: #37505C;
-  color: white;
+  background-color: var(--darker-green);
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -55,9 +75,31 @@ input {
 }
 
 .add-button:hover {
-  background-color: #96616B;
+  background-color: var(--pink);
 }
 
-a {
-  background-color: #96616B;
+nav {
+  font-family: "Gluten", serif;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: var(--white);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+  display: flex;
+  justify-content: space-evenly;
+  gap: 100px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+nav a {
+  text-decoration: none;
+  color: black;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+nav a:hover {
+  color: var(--pink);
 }

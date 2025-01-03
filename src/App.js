@@ -1,26 +1,16 @@
 import './App.css';
+import TaskList from './components/TaskList';
+import NavBar from './components/NavBar';
 
+// https://coolors.co/fff5e8-f76f8e-96616b-2a3e47-113537
 function App() {
   return (
     <div className="App">
       <header className="App-main">
-        <nav>
-          <a href="daily">Daily</a>
-          <a href="main">Main</a>
-        </nav>
+        <NavBar />
         <h1>Daily To-do List</h1>
 
-        <div class="task-field">
-          <input class="task-input" placeholder="Enter task here"></input>
-          <button class="add-button">Add</button>
-        </div>
-
-        <li>
-          <ul>Spanish Duolingo Lesson</ul>
-          <ul>Coding project (GitHub repo push request)</ul>
-          <ul>Game of Chess</ul>
-          <ul>Reading book (Philosophy, Fiction)</ul>
-        </li>
+        <TaskList />
       </header>
     </div>
   );
