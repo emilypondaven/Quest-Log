@@ -55,7 +55,7 @@ function SpriteAnimation() {
             positionX, 0,
             frameWidth * scaleFactor, frameHeight * scaleFactor
         );
-        
+
         if (!isIdle) {
             const moveInterval = setInterval(() => {
                 // Changing from moving to idle at a certain x position
@@ -81,7 +81,7 @@ function SpriteAnimation() {
                     // Upate the position of the sprite when moving
                     return prevPosition + 5;
                 });
-            }, 50);
+            }, 30);
 
             return () => clearInterval(moveInterval);
         }
