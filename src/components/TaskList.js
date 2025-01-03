@@ -34,6 +34,11 @@ function TaskList() {
         setTasks(updatedTasks);
     }
 
+    const deleteTask = (index) => {
+        const updatedTasks = tasks.filter((task, taskIndex) => taskIndex !== index);
+        setTasks(updatedTasks);
+    }
+
     const handleInputChange = (event) => {
         setNewTask(event.target.value);
     }
@@ -67,7 +72,12 @@ function TaskList() {
                             checked={task.isChecked}
                             onChange={() => toggleTaskCompletion(index)} // Toggle checkbox state
                         />
-                        {task.text}
+                        <span 
+                            onClick={() => deleteTask(index)}
+                            style={{ cursor: 'pointer' }}
+                        >
+                            {task.text}
+                        </span>
                     </li>
                 ))}
             </ul>
