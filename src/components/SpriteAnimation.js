@@ -1,68 +1,104 @@
 import React, { useState, useEffect, useRef } from 'react';
-import spriteSheetImage from '../assets/Walk.png'; // Path to your sprite sheet
+import walkingSprite from '../assets/Walk.png';
+import idleSprite from '../assets/Idle.png';
 
 function SpriteAnimation() {
-  const [currentFrame, setCurrentFrame] = useState(0);
-  const [positionX, setPositionX] = useState(0); // Position for moving across the screen
-  const canvasRef = useRef(null); // Create a reference for the canvas
-  const totalFrames = 6;  // Total number of frames in your sprite sheet
-  const frameWidth = 48;  // Width of one frame
-  const frameHeight = 50; // Height of one frame
-  const screenWidth = window.innerWidth; // Get screen width for boundary detection
-  const canvasWidth = screenWidth; // Make canvas width the screen width
+    const [currentFrame, setCurrentFrame] = useState(0);
+    const [positionX, setPositionX] = useState(0);
+    const [isIdle, setIsIdle] = useState(false);
+    const [hasIdled, setHasIdled] = useState(false);
+    const [stopPosition, setStopPosition] = useState(window.innerWidth / 2);
+    const canvasRef = useRef(null);
 
-  useEffect(() => {
-    // Change frame every 100ms
-    const interval = setInterval(() => {
-      setCurrentFrame((prevFrame) => (prevFrame + 1) % totalFrames);
-    }, 120);
+    const totalFramesWalking = 6;
+    const totalFramesIdle = 4;
 
-    return () => clearInterval(interval); // Cleanup on component unmount
-  }, []);
+    const scaleFactor = 1.5;
+    const frameWidth = 48;
+    const frameHeight = 50;
+    const screenWidth = window.innerWidth;
+    const canvasWidth = screenWidth;
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const context = canvas.getContext('2d');
-    const img = new Image();
-    img.src = spriteSheetImage;
+    useEffect(() => {
+        // Change frame every 120ms for both walking and idle
+        const interval = setInterval(() => {
+            setCurrentFrame((prevFrame) => {
+                if (isIdle) {
+                    return (prevFrame + 1) % totalFramesIdle;
+                } else {
+                    return (prevFrame + 1) % totalFramesWalking;
+                }
+            });
+        }, isIdle ? 150 : 120);
 
-    img.onload = () => {
-      // Clear previous frame and draw the current one
-      context.clearRect(0, 0, canvas.width, canvas.height);
-      context.drawImage(
-        img,
-        currentFrame * frameWidth, 0, // X, Y position of the frame in the sprite sheet
-        frameWidth, frameHeight, // Width and height of the frame
-        positionX, 0, // Position where the frame will be drawn on the canvas
-        frameWidth, frameHeight // Width and height to draw the frame
-      );
-    };
+        return () => clearInterval(interval);
+    }, [isIdle]);
 
-    // Update position to move sprite across the screen
-    const moveInterval = setInterval(() => {
-      setPositionX((prevPosition) => {
-        const nextPosition = prevPosition + 5; // Move 5 pixels to the right
-        return nextPosition > screenWidth ? -frameWidth : nextPosition; // Reset position after it moves off the screen
-      });
-    }, 50); // Update position every 30ms
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        const context = canvas.getContext('2d');
+        const walkingImage = new Image();
+        const idleImage = new Image();
 
-    return () => clearInterval(moveInterval); // Cleanup position interval
-  }, [currentFrame]);
+        walkingImage.src = walkingSprite;
+        idleImage.src = idleSprite;
 
-  return (
-    <div>
-      <canvas 
-        ref={canvasRef} 
-        width={canvasWidth}  // Set canvas width to screen width
-        height={frameHeight} 
-        style={{
-          position: 'fixed',
-          bottom: '0',
-          left: '0',
-        }}
-      ></canvas>
-    </div>
-  );
+        walkingImage.onload = idleImage.onload = () => {
+            const img = isIdle ? idleImage : walkingImage;
+
+            // Clear previous frame and draw the current one
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.drawImage(
+                img,
+                currentFrame * frameWidth, 0,
+                frameWidth, frameHeight,
+                positionX, 0,
+                frameWidth * scaleFactor, frameHeight * scaleFactor
+            );
+        };
+
+        if (!isIdle) {
+            const moveInterval = setInterval(() => {
+                setPositionX((prevPosition) => {
+                    if (prevPosition >= stopPosition && !hasIdled) {
+                        setIsIdle(true);
+                        setTimeout(() => {
+                            setIsIdle(false);
+                            setHasIdled(true);
+                        }, 3000);
+                        return prevPosition;
+                    }
+                    if (prevPosition > screenWidth) {
+                        setStopPosition(() => {
+                            const randomPosition = Math.random() * (screenWidth - frameWidth);
+                            const alignedPosition = Math.floor(randomPosition / frameWidth) * frameWidth;
+                            return alignedPosition;
+                        });
+                        setHasIdled(false);
+                        return -frameWidth;
+                    }
+                    return prevPosition + 5;
+                });
+            }, 50);
+
+            return () => clearInterval(moveInterval);
+        }
+    }, [currentFrame, isIdle, hasIdled]);
+
+    return (
+        <div>
+            <canvas 
+                ref={canvasRef} 
+                width={canvasWidth}
+                height={frameHeight * scaleFactor}
+                style={{
+                    position: 'fixed',
+                    bottom: '0',
+                    left: '0',
+                }}
+            ></canvas>
+        </div>
+    );
 }
 
 export default SpriteAnimation;
