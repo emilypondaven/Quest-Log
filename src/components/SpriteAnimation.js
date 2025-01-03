@@ -10,7 +10,14 @@ function SpriteAnimation() {
     const [stopPosition, setStopPosition] = useState(window.innerWidth / 2);
     const canvasRef = useRef(null);
 
+    // Walking sprite image
+    const walkingImage = new Image();
+    walkingImage.src = walkingSprite;
     const totalFramesWalking = 6;
+
+    // Idle spring image
+    const idleImage = new Image();
+    idleImage.src = idleSprite;
     const totalFramesIdle = 4;
 
     const scaleFactor = 1.5;
@@ -37,28 +44,21 @@ function SpriteAnimation() {
     useEffect(() => {
         const canvas = canvasRef.current;
         const context = canvas.getContext('2d');
-        const walkingImage = new Image();
-        const idleImage = new Image();
+        const img = isIdle ? idleImage : walkingImage;
 
-        walkingImage.src = walkingSprite;
-        idleImage.src = idleSprite;
-
-        walkingImage.onload = idleImage.onload = () => {
-            const img = isIdle ? idleImage : walkingImage;
-
-            // Clear previous frame and draw the current one
-            context.clearRect(0, 0, canvas.width, canvas.height);
-            context.drawImage(
-                img,
-                currentFrame * frameWidth, 0,
-                frameWidth, frameHeight,
-                positionX, 0,
-                frameWidth * scaleFactor, frameHeight * scaleFactor
-            );
-        };
-
+        // Clear previous frame and draw the current one
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(
+            img,
+            currentFrame * frameWidth, 0,
+            frameWidth, frameHeight,
+            positionX, 0,
+            frameWidth * scaleFactor, frameHeight * scaleFactor
+        );
+        
         if (!isIdle) {
             const moveInterval = setInterval(() => {
+                // Changing from moving to idle at a certain x position
                 setPositionX((prevPosition) => {
                     if (prevPosition >= stopPosition && !hasIdled) {
                         setIsIdle(true);
@@ -68,6 +68,7 @@ function SpriteAnimation() {
                         }, 3000);
                         return prevPosition;
                     }
+                    // Once it moves to the end of the screen
                     if (prevPosition > screenWidth) {
                         setStopPosition(() => {
                             const randomPosition = Math.random() * (screenWidth - frameWidth);
@@ -77,6 +78,7 @@ function SpriteAnimation() {
                         setHasIdled(false);
                         return -frameWidth;
                     }
+                    // Upate the position of the sprite when moving
                     return prevPosition + 5;
                 });
             }, 50);
