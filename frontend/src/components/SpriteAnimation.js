@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useMemo, useEffect, useRef } from 'react';
 
 // Images
 import catWalkingSprite from '../assets/CatWalk.png';
@@ -17,18 +17,19 @@ function SpriteAnimation(props) {
     
     const canvasRef = useRef(null);
 
-    // Choice of sprite type: dog or cat
-    const walkingSprite = isCatSprite ? catWalkingSprite : dogWalkingSprite;
-    const idleSprite = isCatSprite ? catIdleSprite : dogIdleSprite;
+    const walkingImage = useMemo(() => {
+        const img = new Image();
+        img.src = isCatSprite ? catWalkingSprite : dogWalkingSprite;
+        return img;
+    }, [isCatSprite]); // Only recreate when isCatSprite changes
 
-    // Walking sprite image
-    const walkingImage = new Image();
-    walkingImage.src = walkingSprite;
+    const idleImage = useMemo(() => {
+        const img = new Image();
+        img.src = isCatSprite ? catIdleSprite : dogIdleSprite;
+        return img;
+    }, [isCatSprite]); // Only recreate when isCatSprite changes
+
     const totalFramesWalking = 6;
-
-    // Idle spring image
-    const idleImage = new Image();
-    idleImage.src = idleSprite;
     const totalFramesIdle = 4;
 
     const scaleFactor = 1.5;
@@ -50,7 +51,7 @@ function SpriteAnimation(props) {
         }, isIdle ? 150 : 120);
 
         return () => clearInterval(interval);
-    }, [isIdle]);
+    }, [isIdle, setCurrentFrame]);
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -96,7 +97,7 @@ function SpriteAnimation(props) {
 
             return () => clearInterval(moveInterval);
         }
-    }, [currentFrame, isIdle, hasIdled]);
+    }, [currentFrame, isIdle, hasIdled, walkingImage, idleImage, positionX, setHasIdled, setIsIdle, setPositionX, setStopPosition, stopPosition, screenWidth]);
 
     return (
         <div>

@@ -9,6 +9,7 @@ import SpriteAnimation from './components/SpriteAnimation';
 
 // Colour scheme: https://coolors.co/fff5e8-f76f8e-96616b-2a3e47-113537
 function App() {
+  // Sprite variable states
   const [isCatSprite, setIsCatSprite] = useState(true);
   const [currentFrame, setCurrentFrame] = useState(0);
   const [positionX, setPositionX] = useState(0);

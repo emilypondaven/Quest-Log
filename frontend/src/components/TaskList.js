@@ -1,42 +1,80 @@
 import React, { useState } from "react";
 
-function TaskList({ tasks, setTasks }) {
+function TaskList({ tasks, setTasks, endpoint }) {
     const [newTask, setNewTask] = useState("");
 
-    // Function to handle adding a new task
+    // Handling add a new task to backend and frontend
     const addTask = () => {
-        if (newTask.trim()) {
-            // Check if any task's text includes the inputted text
-            const taskExists = tasks.some(task => task.text.toLowerCase() === newTask.toLowerCase());
-
-            if (!taskExists) {
-                const newTaskObject = { text: newTask, isChecked: false };
-                setTasks([...tasks, newTaskObject]);
-                setNewTask("");
+        // Check if it already exists
+        const taskExists = tasks.some(task => task.text.toLowerCase() === newTask.toLowerCase());
+        // Check that the new task is not empty
+        if (!taskExists && newTask.trim()) {
+            const newTaskObject = { text: newTask, isChecked: false };
+            const requestBody = {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(newTaskObject)
             }
+
+            fetch(endpoint, requestBody)
+                .then(response => response.json())
+                .then(data => {
+                    setTasks([...tasks, data]);
+                    setNewTask("");
+                })
+                .catch((error) => console.error("Error:", error));
         }
+    }
+
+    // Handling update a saved task for backend and frontend
+    const updateTaskCompletion = (index) => {
+        const task = tasks[index];
+        const updatedTaskObject = { ...task, isChecked: !task.isChecked }
+        const requestBody = {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(updatedTaskObject)
+        }
+
+        fetch(endpoint, requestBody)
+            .then((response) => response.json())
+            .then((data) => {
+                setTasks((prevTasks) =>
+                    prevTasks.map((task, taskIndex) =>
+                        taskIndex === index ? data : task
+                    )
+                );
+            })
+            .catch((error) => {
+                console.error("Error updating task:", error);
+            })
     };
 
-    const toggleTaskCompletion = (index) => {
-        const updatedTasks = tasks.map((task, taskIndex) => {
-            if (taskIndex === index) {
-                return { ...task, isChecked: !task.isChecked };
-            }
-            return task;
-        });
-        setTasks(updatedTasks);
-    }
-
+    // Handling deleting a saved task for backend and frontend
     const deleteTask = (index) => {
-        const taskToDelete = tasks[index].text;
-        const updatedTasks = tasks.filter((task, taskIndex) => taskIndex !== index);
-        setTasks(updatedTasks);
-        setNewTask(taskToDelete);
-    }
+        const taskToDelete = tasks[index];
+        const requestBody = {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(taskToDelete)
+        };
+
+        fetch(endpoint, requestBody)
+            .then((response) => response.json())
+            .then((data) => {
+                setTasks((prevTasks) =>
+                    prevTasks.filter((task, taskIndex) => taskIndex !== index)
+                );
+                setNewTask(data.text);
+            })
+            .catch((error) => {
+                console.error("Error deleting task:", error);
+            })
+    };
 
     const handleInputChange = (event) => {
         setNewTask(event.target.value);
-    }
+    };
 
     const handleKeyDown = (event) => {
         if (event.key === "Enter") {
@@ -65,7 +103,7 @@ function TaskList({ tasks, setTasks }) {
                         <input
                             type="checkbox"
                             checked={task.isChecked}
-                            onChange={() => toggleTaskCompletion(index)} // Toggle checkbox state
+                            onChange={() => updateTaskCompletion(index)} // Toggle checkbox state
                         />
                         <span 
                             onClick={() => deleteTask(index)}
