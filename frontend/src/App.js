@@ -26,7 +26,6 @@ function App() {
       <Router>
         <NavBar />
         <SpriteChoiceButton 
-          isCatSprite={isCatSprite} 
           handleSpriteChange={handleSpriteChange} 
         />
 

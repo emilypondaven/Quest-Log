@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function SpriteChoiceButton({ isCatSprite, handleSpriteChange }) {
+function SpriteChoiceButton({ handleSpriteChange }) {
     return (
         <button
             onClick={handleSpriteChange}
