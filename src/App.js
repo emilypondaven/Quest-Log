@@ -33,37 +33,11 @@ function App() {
         <Routes>
           <Route 
             path="/" 
-            element={<Daily 
-              isCatSprite={isCatSprite} 
-              handleSpriteChange={handleSpriteChange}
-              currentFrame={currentFrame}
-              setCurrentFrame={setCurrentFrame}
-              positionX={positionX}
-              setPositionX={setPositionX}
-              isIdle={isIdle}
-              setIsIdle={setIsIdle}
-              hasIdled={hasIdled}
-              setHasIdled={setHasIdled}
-              stopPosition={stopPosition}
-              setStopPosition={setStopPosition}
-            />} 
+            element={<Daily />} 
           />
           <Route 
             path="/focus" 
-            element={<Focus 
-              isCatSprite={isCatSprite} 
-              handleSpriteChange={handleSpriteChange}
-              currentFrame={currentFrame}
-              setCurrentFrame={setCurrentFrame}
-              positionX={positionX}
-              setPositionX={setPositionX}
-              isIdle={isIdle}
-              setIsIdle={setIsIdle}
-              hasIdled={hasIdled}
-              setHasIdled={setHasIdled}
-              stopPosition={stopPosition}
-              setStopPosition={setStopPosition}
-            />} 
+            element={<Focus />} 
           />
         </Routes>
 
