@@ -52,7 +52,7 @@ const deleteTask = (req, res) => {
     }
 
     tasksMap[taskType].splice(taskIndex, 1);
-    res.status(200).json(taskToDelete);
+    res.status(200).json({ message: 'Task was deleted' });
 };
 
 // General PUT request handler

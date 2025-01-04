@@ -65,7 +65,7 @@ function TaskList({ tasks, setTasks, endpoint }) {
                 setTasks((prevTasks) =>
                     prevTasks.filter((task, taskIndex) => taskIndex !== index)
                 );
-                setNewTask(data.text);
+                setNewTask(taskToDelete.text);
             })
             .catch((error) => {
                 console.error("Error deleting task:", error);
