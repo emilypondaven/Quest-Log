@@ -21,7 +21,7 @@ con.connect((err) => {
     console.log('Connected to MySQL database');
 });
 
-// General GET request handler
+// GET request handler
 const getTasks = (req, res) => {
     const taskType = req.params.taskType;
 
@@ -39,7 +39,7 @@ const getTasks = (req, res) => {
     });
 };
 
-// General POST request handler
+// POST request handler
 const addTask = (req, res) => {
     const taskType = req.params.taskType;
     const { text, isChecked } = req.body;
@@ -50,7 +50,6 @@ const addTask = (req, res) => {
 
     const query = 'INSERT INTO tasks (type, text, isChecked) VALUES (?, ?, ?)';
     con.query(query, [taskType, text, isChecked], (err, result) => {
-        print(taskType, text, isChecked);
         if (err) {
             console.error('Error inserting task:', err);
             return res.status(500).json({ message: 'Error inserting task' });
@@ -60,7 +59,7 @@ const addTask = (req, res) => {
     });
 };
 
-// General DELETE request handler
+// DELETE request handler
 const deleteTask = (req, res) => {
     const taskType = req.params.taskType;
     const { text } = req.body;
@@ -84,7 +83,7 @@ const deleteTask = (req, res) => {
     });
 };
 
-// General PUT request handler
+// PUT request handler
 const updateTask = (req, res) => {
     const taskType = req.params.taskType;
     const { text, isChecked } = req.body;

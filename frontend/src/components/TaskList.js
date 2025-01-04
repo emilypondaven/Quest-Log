@@ -65,7 +65,7 @@ function TaskList({ tasks, setTasks, endpoint }) {
                     setTasks((prevTasks) =>
                         prevTasks.filter((task, taskIndex) => taskIndex !== index)
                     );
-                    setNewTask('');
+                    setNewTask(taskToDelete.text);
                 } else {
                     console.error('Failed to delete task');
                 }
