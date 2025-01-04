@@ -6,12 +6,15 @@ import catIdleSprite from '../assets/CatIdle.png';
 import dogWalkingSprite from '../assets/DogWalk.png';
 import dogIdleSprite from '../assets/DogIdle.png';
 
-function SpriteAnimation({ isCatSprite }) {
-    const [currentFrame, setCurrentFrame] = useState(0);
-    const [positionX, setPositionX] = useState(0);
-    const [isIdle, setIsIdle] = useState(false);
-    const [hasIdled, setHasIdled] = useState(false);
-    const [stopPosition, setStopPosition] = useState(window.innerWidth / 2);
+function SpriteAnimation(props) {
+    const { 
+        isCatSprite, currentFrame, 
+        setCurrentFrame, positionX, 
+        setPositionX, isIdle, setIsIdle, 
+        hasIdled, setHasIdled, stopPosition, 
+        setStopPosition
+    } = props;
+    
     const canvasRef = useRef(null);
 
     // Choice of sprite type: dog or cat
