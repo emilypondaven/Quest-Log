@@ -192,6 +192,14 @@ nav a:hover {
   cursor: pointer;
 }
 
+#sprite-button:hover {
+  top: 68px;
+  right: 18px;
+  width: 79px;
+  height: 79px;
+  font-size: 21px;
+}
+
 /* Adjust button position for smaller screen sizes */
 @media screen and (max-width: 575px) {
   ul {
@@ -200,5 +208,9 @@ nav a:hover {
   
   #sprite-button {
     top: 100px;
+  }
+
+  #sprite-button:hover {
+    top: 98px;
   }
 }
