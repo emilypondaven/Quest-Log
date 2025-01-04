@@ -45,5 +45,4 @@ Frontend:
     - Add button to choose between cat and dog animation
 
 Today:
-- Fix button to choose between cat and dog
 - Navigation functionality (create new page)

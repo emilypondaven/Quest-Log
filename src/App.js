@@ -1,9 +1,9 @@
 import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import React, { useState } from 'react';
-import TaskList from './components/TaskList';
 import NavBar from './components/NavBar';
-import SpriteAnimation from './components/SpriteAnimation';
-import SpriteChoiceButton from './components/SpriteChoiceButton';
+import Daily from './pages/Daily';
+import Focus from './pages/Focus';
 
 // Colour scheme: https://coolors.co/fff5e8-f76f8e-96616b-2a3e47-113537
 function App() {
@@ -16,14 +16,13 @@ function App() {
   return (
     <div className="App">
       <header className="App-main">
-        <NavBar />
-        <SpriteChoiceButton isCatSprite={isCatSprite} handleSpriteChange={handleSpriteChange} />
-        <div className="todo-container">
-          <h1>Daily To-do List</h1>
-
-          <TaskList />
-          <SpriteAnimation isCatSprite={isCatSprite} />
-        </div>
+        <Router>
+          <NavBar />
+          <Routes>
+            <Route path="/" element={<Daily isCatSprite={isCatSprite} handleSpriteChange={handleSpriteChange} />} />
+            <Route path="/focus" element={<Focus isCatSprite={isCatSprite} handleSpriteChange={handleSpriteChange} />} />
+          </Routes>
+        </Router>
       </header>
     </div>
   );

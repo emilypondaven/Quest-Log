@@ -1,13 +1,6 @@
 import React, { useState } from "react";
 
-function TaskList() {
-    const [tasks, setTasks] = useState([
-        { text: "Spanish Duoliungo Lesson", isChecked: false },
-        { text: "Coding Project (GitHub repo push request)", isChecked: false },
-        { text: "Game of Chess", isChecked: false },
-        { text: "Reading book (Philosophy, Fiction)", isChecked: false }
-    ]);
-
+function TaskList({ tasks, setTasks }) {
     const [newTask, setNewTask] = useState("");
 
     // Function to handle adding a new task
