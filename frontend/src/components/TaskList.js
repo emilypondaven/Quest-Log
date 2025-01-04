@@ -60,12 +60,15 @@ function TaskList({ tasks, setTasks, endpoint }) {
         };
 
         fetch(endpoint, requestBody)
-            .then((response) => response.json())
-            .then((data) => {
-                setTasks((prevTasks) =>
-                    prevTasks.filter((task, taskIndex) => taskIndex !== index)
-                );
-                setNewTask(taskToDelete.text);
+            .then((response) => {
+                if (response.status === 204) {
+                    setTasks((prevTasks) =>
+                        prevTasks.filter((task, taskIndex) => taskIndex !== index)
+                    );
+                    setNewTask('');
+                } else {
+                    console.error('Failed to delete task');
+                }
             })
             .catch((error) => {
                 console.error("Error deleting task:", error);

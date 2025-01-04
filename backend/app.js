@@ -2,6 +2,7 @@ let express = require("express");
 let app = express();
 const PORT = 5000;
 
+// Data storage
 let dailyTasks = [
     { text: "Duolingo", isChecked: true },
     { text: "Play chess", isChecked: false }
@@ -11,12 +12,12 @@ let focusTasks = [
     { text: "Work and work", isChecked: true }
 ];
 
-app.use(express.json());
-
 const tasksMap = {
     'daily-tasks': dailyTasks,
     'focus-tasks': focusTasks
 };
+
+app.use(express.json());
 
 // General GET request handler
 const getTasks = (req, res) => {
@@ -52,7 +53,7 @@ const deleteTask = (req, res) => {
     }
 
     tasksMap[taskType].splice(taskIndex, 1);
-    res.status(200).json({ message: 'Task was deleted' });
+    res.status(204).send();
 };
 
 // General PUT request handler
