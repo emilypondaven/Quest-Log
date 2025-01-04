@@ -6,7 +6,7 @@ function Focus() {
     const [focusTasks, setFocusTasks] = useState([]);
         
     useEffect(() => {
-        fetch('/focus-tasks')
+        fetch('focus')
             .then((response) => response.json())
             .then((data) => setFocusTasks(data))
             .catch((error) => console.error('Error:', error));
@@ -18,7 +18,7 @@ function Focus() {
             <TaskList 
                 tasks={focusTasks} 
                 setTasks={setFocusTasks}
-                endpoint="/focus-tasks"
+                endpoint="focus"
             />
         </div>
   );

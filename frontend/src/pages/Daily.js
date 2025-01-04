@@ -6,7 +6,7 @@ function Daily() {
     const [dailyTasks, setDailyTasks] = useState([]);
     
     useEffect(() => {
-        fetch('/daily-tasks')
+        fetch('daily')
             .then((response) => response.json())
             .then((data) => setDailyTasks(data))
             .catch((error) => console.error('Error:', error));
@@ -18,7 +18,7 @@ function Daily() {
             <TaskList 
                 tasks={dailyTasks} 
                 setTasks={setDailyTasks}
-                endpoint="/daily-tasks"
+                endpoint="daily"
             />
         </div>
   );
