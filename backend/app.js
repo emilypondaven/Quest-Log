@@ -118,3 +118,8 @@ app.put('/:taskType', updateTask);
 app.listen(PORT, () =>
     console.log(`Server running on port ${PORT}!`)
 );
+
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something went wrong!');
+});
