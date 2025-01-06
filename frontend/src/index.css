@@ -218,6 +218,6 @@ nav a:hover {
 /* iPhone 12: Portait mode */
 @media screen and (max-width: 390px) and (orientation: portrait) {
   body, input, button {
-    font-size: 50px;
+    font-size: 70px;
   }
 }
