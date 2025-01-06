@@ -200,7 +200,7 @@ nav a:hover {
   font-size: 21px;
 }
 
-/* Adjust button position for smaller screen sizes */
+/* Laptop: reduced size */
 @media screen and (max-width: 575px) {
   ul {
     max-height: 200px;
@@ -212,5 +212,12 @@ nav a:hover {
 
   #sprite-button:hover {
     top: 98px;
+  }
+}
+
+/* iPhone 12: Portait mode */
+@media screen and (max-width: 390px) and (orientation: portrait) {
+  body, input, button {
+    font-size: 50px;
   }
 }
