@@ -1,3 +1,4 @@
+// CREATE TABLE tasks ( id INT AUTO_INCREMENT PRIMARY KEY, type ENUM('daiy', 'focus') NOT NULL, text VARCHAR(255) NOT NULL, isChecked BOOLEAN NOT NULL);
 let express = require("express");
 let app = express();
 const PORT = process.env.PORT || 5000;
@@ -5,15 +6,14 @@ require('dotenv').config();
 app.use(express.json());
 
 // Set up cors
-const allowedOrigins = [
-    'https://quest-log-gray.vercel.app',
-    'https://quest-log-emilypondavens-projects.vercel.app',
-];
 let cors = require('cors');
-app.use(cors({ origin: '*' }));
+const allowedOrigins = process.env.ALLOWED_ORIGINS.split(',');
+app.use(cors({
+    origin: allowedOrigins,
+    methods: ['GET', 'POST', 'PUT', 'DELETE']
+ }));
 
 const { Pool } = require('pg');
-// CREATE TABLE tasks ( id INT AUTO_INCREMENT PRIMARY KEY, type ENUM('daiy', 'focus') NOT NULL, text VARCHAR(255) NOT NULL, isChecked BOOLEAN NOT NULL);
 // Create a connection pool to MySQL
 let pool = new Pool({
     host: process.env.DB_HOST,
