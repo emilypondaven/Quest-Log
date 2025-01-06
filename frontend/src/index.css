@@ -216,13 +216,13 @@ nav a:hover {
 }
 
 /* Media Query for iPhone 12 */
-@media screen and (max-width: 400px) and (orientation: portrait) {
+@media screen and (max-width: 414px) { /* Max width for iPhone 12 in portrait */
   body {
-    font-size: 100px; /* Smaller font for iPhone 12 portrait */
+    font-size: 18px; /* Smaller font for iPhone 12 */
   }
 
   h1 {
-    font-size: 50px; /* Reduce the size of the title */
+    font-size: 30px; /* Reduce the size of the title */
   }
 
   ul {
@@ -242,13 +242,13 @@ nav a:hover {
   }
 
   nav {
-    gap: 50px; /* Reduce space between nav items */
+    gap: 30px; /* Reduce space between nav items */
     padding-top: 5px;
     padding-bottom: 5px;
   }
 
   nav a {
-    font-size: 50px; /* Reduce nav font size */
+    font-size: 25px; /* Reduce nav font size */
   }
 
   #sprite-button {
