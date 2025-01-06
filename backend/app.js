@@ -6,14 +6,17 @@ const mysql = require('mysql2');
 const PORT = 5000;
 
 // Create a connection pool to MySQL
-let con = mysql.createConnection({
+let pool = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER, 
     password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME
+    database: process.env.DB_NAME,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 });
 
-con.connect((err) => {
+pool.query('SELECT 1', (err) => {
     if (err) {
         console.error('Error connecting to the database:', err);
         return;
@@ -21,16 +24,20 @@ con.connect((err) => {
     console.log('Connected to MySQL database');
 });
 
+const validateTaskType = (req, res, next) => {
+    const { taskType } = req.params;
+    if (taskType !== 'daily' && taskType !== 'focus') {
+        return res.status(404).json({ message: 'Task type not found' });
+    }
+    next();
+};
+
 // GET request handler
 const getTasks = (req, res) => {
     const taskType = req.params.taskType;
 
-    if (taskType !== 'daily' && taskType !== 'focus') {
-        return res.status(404).json({ message: 'Task type not found' });
-    }
-
     const query = 'SELECT * FROM tasks WHERE type = ?'
-    con.query(query, [taskType], (err, results) => {
+    pool.query(query, [taskType], (err, results) => {
         if (err) {
             console.error('Error fetching tasks:', err);
             return res.status(500).json({ message: 'Error fetching tasks' });
@@ -44,12 +51,8 @@ const addTask = (req, res) => {
     const taskType = req.params.taskType;
     const { text, isChecked } = req.body;
 
-    if (taskType !== 'daily' && taskType !== 'focus') {
-        return res.status(404).json({ message: 'Task type not found' });
-    }
-
     const query = 'INSERT INTO tasks (type, text, isChecked) VALUES (?, ?, ?)';
-    con.query(query, [taskType, text, isChecked], (err, result) => {
+    pool.query(query, [taskType, text, isChecked], (err, result) => {
         if (err) {
             console.error('Error inserting task:', err);
             return res.status(500).json({ message: 'Error inserting task' });
@@ -64,12 +67,8 @@ const deleteTask = (req, res) => {
     const taskType = req.params.taskType;
     const { text } = req.body;
 
-    if (taskType !== 'daily' && taskType !== 'focus') {
-        return res.status(404).json({ message: 'Task type not found' });
-    }
-
     const query = 'DELETE FROM tasks WHERE type = ? AND text = ?';
-    con.query(query, [taskType, text], (err, result) => {
+    pool.query(query, [taskType, text], (err, result) => {
         if (err) {
             console.error('Error deleting task:', err);
             return res.status(500).json({ message: 'Error deleting task' });
@@ -88,12 +87,8 @@ const updateTask = (req, res) => {
     const taskType = req.params.taskType;
     const { text, isChecked } = req.body;
 
-    if (taskType !== 'daily' && taskType !== 'focus') {
-        return res.status(404).json({ message: 'Task type not found' });
-    }
-
     const query = 'UPDATE tasks SET isChecked = ? WHERE type = ? AND text = ?';
-    con.query(query, [isChecked, taskType, text], (err, result) => {
+    pool.query(query, [isChecked, taskType, text], (err, result) => {
         if (err) {
             console.error('Error updating task:', err);
             return res.status(500).json({ message: 'Error updating task' });
@@ -109,10 +104,10 @@ const updateTask = (req, res) => {
 };
 
 // Define routes for tasks
-app.get('/:taskType', getTasks);
-app.post('/:taskType', addTask);
-app.delete('/:taskType', deleteTask);
-app.put('/:taskType', updateTask);
+app.get('/:taskType', validateTaskType, getTasks);
+app.post('/:taskType', validateTaskType, addTask);
+app.delete('/:taskType', validateTaskType, deleteTask);
+app.put('/:taskType', validateTaskType, updateTask);
 
 // Listen on the port number for any requests
 app.listen(PORT, () =>
