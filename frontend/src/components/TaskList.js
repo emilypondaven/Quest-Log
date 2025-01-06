@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+const apiURL = process.env.REACT_APP_API_URL;
 
 function TaskList({ tasks, setTasks, endpoint }) {
     const [newTask, setNewTask] = useState("");
@@ -16,7 +17,7 @@ function TaskList({ tasks, setTasks, endpoint }) {
                 body: JSON.stringify(newTaskObject)
             }
 
-            fetch(endpoint, requestBody)
+            fetch(`${apiURL}/${endpoint}`, requestBody)
                 .then(response => response.json())
                 .then(data => {
                     setTasks([...tasks, data]);
@@ -36,7 +37,7 @@ function TaskList({ tasks, setTasks, endpoint }) {
             body: JSON.stringify(updatedTaskObject)
         }
 
-        fetch(endpoint, requestBody)
+        fetch(`${apiURL}/${endpoint}`, requestBody)
             .then((response) => response.json())
             .then((data) => {
                 setTasks((prevTasks) =>
@@ -59,7 +60,7 @@ function TaskList({ tasks, setTasks, endpoint }) {
             body: JSON.stringify(taskToDelete)
         };
 
-        fetch(endpoint, requestBody)
+        fetch(`${apiURL}/${endpoint}`, requestBody)
             .then((response) => {
                 if (response.status === 204) {
                     setTasks((prevTasks) =>

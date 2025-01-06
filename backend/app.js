@@ -1,10 +1,13 @@
 let express = require("express");
+let cors = require('cors');
 let app = express();
+const PORT = 5000;
 require('dotenv').config();
 app.use(express.json());
-const { Pool } = require('pq');
-const PORT = 5000;
+app.use(cors());
 
+const { Pool } = require('pg');
+// CREATE TABLE tasks ( id INT AUTO_INCREMENT PRIMARY KEY, type ENUM('daiy', 'focus') NOT NULL, text VARCHAR(255) NOT NULL, isChecked BOOLEAN NOT NULL);
 // Create a connection pool to MySQL
 let pool = new Pool({
     host: process.env.DB_HOST,
@@ -19,7 +22,7 @@ pool.query('SELECT NOW()', (err, res) => {
         console.error('Error connecting to the database:', err);
         return;
     }
-    console.log('Connected to MySQL database');
+    console.log('Connected to PostgreSQL database');
 });
 
 const validateTaskType = (req, res, next) => {
@@ -40,7 +43,7 @@ const getTasks = (req, res) => {
             console.error('Error fetching tasks:', err);
             return res.status(500).json({ message: 'Error fetching tasks' });
         }
-        res.json(results.row);
+        res.json(results.rows);
     });
 };
 
@@ -49,7 +52,7 @@ const addTask = (req, res) => {
     const taskType = req.params.taskType;
     const { text, isChecked } = req.body;
 
-    const query = 'INSERT INTO tasks (type, text, isChecked) VALUES ($1, $2, $3) RETURNING id';
+    const query = 'INSERT INTO tasks (type, text, "isChecked") VALUES ($1, $2, $3) RETURNING id';
     pool.query(query, [taskType, text, isChecked], (err, result) => {
         if (err) {
             console.error('Error inserting task:', err);
@@ -85,7 +88,7 @@ const updateTask = (req, res) => {
     const taskType = req.params.taskType;
     const { text, isChecked } = req.body;
 
-    const query = 'UPDATE tasks SET isChecked = $1 WHERE type = $2 AND text = $3';
+    const query = 'UPDATE tasks SET "isChecked" = $1 WHERE type = $2 AND text = $3';
     pool.query(query, [isChecked, taskType, text], (err, result) => {
         if (err) {
             console.error('Error updating task:', err);
