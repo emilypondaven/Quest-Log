@@ -6,7 +6,7 @@ function Daily() {
     const [dailyTasks, setDailyTasks] = useState([]);
     
     useEffect(() => {
-        fetch('daily')
+        fetch(`${process.env.REACT_APP_API_URL}/daily`)
             .then((response) => response.json())
             .then((data) => setDailyTasks(data))
             .catch((error) => console.error('Error:', error));

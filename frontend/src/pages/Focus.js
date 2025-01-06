@@ -6,7 +6,7 @@ function Focus() {
     const [focusTasks, setFocusTasks] = useState([]);
         
     useEffect(() => {
-        fetch('focus')
+        fetch(`${process.env.REACT_APP_API_URL}/focus`)
             .then((response) => response.json())
             .then((data) => setFocusTasks(data))
             .catch((error) => console.error('Error:', error));
