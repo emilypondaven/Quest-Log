@@ -7,9 +7,8 @@ app.use(express.json());
 
 // Set up cors
 let cors = require('cors');
-const allowedOrigins = process.env.ALLOWED_ORIGINS.split(',');
 app.use(cors({
-    origin: allowedOrigins,
+    origin: process.env.ALLOWED_ORIGINS,
     methods: ['GET', 'POST', 'PUT', 'DELETE']
  }));
 
