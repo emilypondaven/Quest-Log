@@ -215,10 +215,51 @@ nav a:hover {
   }
 }
 
-/* iPhone 12: Portait mode */
-@media screen and (max-width: 390px) and (orientation: portrait) {
-  body, input, button {
-    font-size: 70px;
-    background-color: blue;
+/* Media Query for iPhone 12 Landscape */
+@media screen and (max-width: 844px) and (orientation: landscape) {
+  body {
+    font-size: 18px; /* Adjust font size for landscape */
+  }
+
+  h1 {
+    font-size: 35px; /* Slightly smaller than portrait */
+  }
+
+  ul {
+    max-height: 250px; /* Increased list height in landscape */
+  }
+
+  .task-field {
+    gap: 15px;
+  }
+
+  .task-input {
+    width: 180px; /* Slightly wider input */
+  }
+
+  button {
+    padding: 7px 12px;
+  }
+
+  nav {
+    gap: 80px;
+  }
+
+  nav a {
+    font-size: 35px;
+  }
+
+  #sprite-button {
+    width: 70px;
+    height: 70px;
+    top: 65px;
+    right: 18px;
+  }
+
+  #sprite-button:hover {
+    width: 74px;
+    height: 74px;
+    top: 63px;
+    right: 16px;
   }
 }
