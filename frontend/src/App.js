@@ -24,6 +24,7 @@ function App() {
 
   return (
     <div className="App-main">
+      <title>Quest Log</title>
       <Router>
         <NavBar />
         <SpriteChoiceButton 
