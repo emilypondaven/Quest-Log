@@ -218,11 +218,11 @@ nav a:hover {
 /* Media Query for iPhone 12 */
 @media screen and (max-width: 400px) and (orientation: portrait) {
   body {
-    font-size: 16px; /* Smaller font for iPhone 12 portrait */
+    font-size: 40px; /* Smaller font for iPhone 12 portrait */
   }
 
   h1 {
-    font-size: 30px; /* Reduce the size of the title */
+    font-size: 50px; /* Reduce the size of the title */
   }
 
   ul {
@@ -248,7 +248,7 @@ nav a:hover {
   }
 
   nav a {
-    font-size: 30px; /* Reduce nav font size */
+    font-size: 50px; /* Reduce nav font size */
   }
 
   #sprite-button {
