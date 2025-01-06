@@ -215,51 +215,53 @@ nav a:hover {
   }
 }
 
-/* Media Query for iPhone 12 Landscape */
-@media screen and (max-width: 844px) and (orientation: landscape) {
+/* Media Query for iPhone 12 */
+@media screen and (max-width: 390px) and (orientation: portrait) {
   body {
-    font-size: 18px; /* Adjust font size for landscape */
+    font-size: 16px; /* Smaller font for iPhone 12 portrait */
   }
 
   h1 {
-    font-size: 35px; /* Slightly smaller than portrait */
+    font-size: 30px; /* Reduce the size of the title */
   }
 
   ul {
-    max-height: 250px; /* Increased list height in landscape */
+    max-height: 200px; /* Reduce the height of the list */
   }
 
   .task-field {
-    gap: 15px;
+    gap: 10px; /* Reduce space between input and button */
   }
 
   .task-input {
-    width: 180px; /* Slightly wider input */
+    width: 160px; /* Narrower input field */
   }
 
   button {
-    padding: 7px 12px;
+    padding: 6px 10px; /* Smaller button size */
   }
 
   nav {
-    gap: 80px;
+    gap: 50px; /* Reduce space between nav items */
+    padding-top: 5px;
+    padding-bottom: 5px;
   }
 
   nav a {
-    font-size: 35px;
+    font-size: 30px; /* Reduce nav font size */
   }
 
   #sprite-button {
-    width: 70px;
-    height: 70px;
-    top: 65px;
-    right: 18px;
+    width: 60px;
+    height: 60px;
+    top: 60px; /* Adjust button position */
+    right: 15px;
   }
 
   #sprite-button:hover {
-    width: 74px;
-    height: 74px;
-    top: 63px;
-    right: 16px;
+    width: 64px;
+    height: 64px;
+    top: 58px;
+    right: 13px;
   }
 }
