@@ -1,10 +1,14 @@
 let express = require("express");
-let cors = require('cors');
 let app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 require('dotenv').config();
 app.use(express.json());
-app.use(cors());
+
+// Set up cors
+let cors = require('cors');
+app.use(cors({
+    origin: 'https://quest-log-gray.vercel.app'
+}));
 
 const { Pool } = require('pg');
 // CREATE TABLE tasks ( id INT AUTO_INCREMENT PRIMARY KEY, type ENUM('daiy', 'focus') NOT NULL, text VARCHAR(255) NOT NULL, isChecked BOOLEAN NOT NULL);
@@ -117,5 +121,5 @@ app.listen(PORT, () =>
 
 app.use((err, req, res, next) => {
     console.error(err.stack);
-    res.status(500).send('Something went wrong!');
+    res.status(500).send('Internal server error');
 });
