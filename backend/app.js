@@ -7,7 +7,7 @@ app.use(express.json());
 // Set up cors
 let cors = require('cors');
 app.use(cors({
-    origin: 'https://quest-log-gray.vercel.app'
+    origin: process.env.FRONTEND_URL
 }));
 
 const { Pool } = require('pg');
