@@ -5,10 +5,12 @@ require('dotenv').config();
 app.use(express.json());
 
 // Set up cors
+const allowedOrigins = [
+    'https://quest-log-gray.vercel.app',
+    'https://quest-log-emilypondavens-projects.vercel.app',
+];
 let cors = require('cors');
-app.use(cors({
-    origin: process.env.FRONTEND_URL
-}));
+app.use(cors({ origin: '*' }));
 
 const { Pool } = require('pg');
 // CREATE TABLE tasks ( id INT AUTO_INCREMENT PRIMARY KEY, type ENUM('daiy', 'focus') NOT NULL, text VARCHAR(255) NOT NULL, isChecked BOOLEAN NOT NULL);
@@ -79,7 +81,7 @@ const deleteTask = (req, res) => {
             return res.status(500).json({ message: 'Error deleting task' });
         }
 
-        if (result.affectedRows === 0) {
+        if (result.rowCount === 0) {
             return res.status(404).json({ message: 'Task not found' });
         }
 
