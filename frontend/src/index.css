@@ -219,5 +219,6 @@ nav a:hover {
 @media screen and (max-width: 390px) and (orientation: portrait) {
   body, input, button {
     font-size: 70px;
+    background-color: blue;
   }
 }
