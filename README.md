@@ -10,6 +10,7 @@ A dynamic multi-page web application using React (frontend) and Node.js (backend
 - Cat/dog running animation
 - User-friendly colors & design
 - REST API connected to database
+- Adjusted for different screen sizes (i.e. iPhone & Laptop screens)
 
 # Libraries/Utilities
 - Programming languages: JavaScript (majority), CSS & HTML
