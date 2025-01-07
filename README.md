@@ -1,50 +1,21 @@
-# Getting Started with Create React App
+# Description
+A dynamic multi-page web application using React (frontend) and Node.js (backend) with PostgreSQL database that allows users to log their daily and focus/current tasks
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Features
+## Individual webpages
+- Focus tasks (with CRUD operations)
+- Daily tasks (with CRUD operations)
 
-## Available Scripts
+## Extras
+- Cat/dog running animation
+- User-friendly colors & design
+- REST API connected to database
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Libraries/Utilities
+- Programming languages: JavaScript (majority), CSS & HTML
+- Frontend: React (Deployed with Vercel)
+- Backend: Node js (Deployed with Render)
+- Database: PostgreSQL (Deployed with Render)
 
 
-
-# Features to add
-Deployment:
-- Render
-Backend: 
-- Node.js with Express:
-    - Saving a password at the start
-    - Storage of data (managed database) - MongoDB??
-Frontend:
-- React
-- To-do list:
-    - Add navigation bar functionality
-    - Add button to choose between cat and dog animation
-
-Today:
-- fix adding elements
-- fix update elements
-- fix deleting elements
+Screenshots
