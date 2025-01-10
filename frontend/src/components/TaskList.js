@@ -98,13 +98,13 @@ function TaskList({ tasks, setTasks, endpoint }) {
                     );
 
                     // Separate the text into category and task
-                    const taskParts = taskToDelete.text.split(": ");
-                    if (taskParts.includes(":")) {
+                    if (taskToDelete.text.includes(":")) {
+                        const taskParts = taskToDelete.text.split(": ");
                         setNewCategory(taskParts[0]);
                         setNewTask(taskParts[1]);
                     } else {
                         setNewCategory("");
-                        setNewTask(taskParts[0]);
+                        setNewTask(taskToDelete.text);
                     }
                 } else {
                     console.error('Failed to delete task');
