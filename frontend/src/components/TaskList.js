@@ -99,7 +99,7 @@ function TaskList({ tasks, setTasks, endpoint }) {
 
                     // Separate the text into category and task
                     const taskParts = taskToDelete.text.split(": ");
-                    if (data.text.includes(":")) {
+                    if (taskParts.includes(":")) {
                         setNewCategory(taskParts[0]);
                         setNewTask(taskParts[1]);
                     } else {
