@@ -98,9 +98,9 @@ function TaskList({ tasks, setTasks, endpoint }) {
                     );
 
                     // Separate the text into category and task
-                    if (taskToDelete.text.includes(":")) {
-                        const taskParts = taskToDelete.text.split(": ");
-                        setNewCategory(taskParts[0]);
+                    const taskParts = taskToDelete.text.split(": ");
+                    if (taskParts.length > 1) {
+                        setNewCategory(capitalizeFirstLetter(taskParts[0].toLowerCase()));
                         setNewTask(taskParts[1]);
                     } else {
                         setNewCategory("");
@@ -144,6 +144,7 @@ function TaskList({ tasks, setTasks, endpoint }) {
                     list="category-options" 
                     className="task-input" 
                     placeholder="Enter category here"
+                    value={newCategory}
                     onChange={handleCategoryChange}
                     onKeyDown={handleKeyDown}
                 />
