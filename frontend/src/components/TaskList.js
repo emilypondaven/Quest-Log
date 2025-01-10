@@ -40,7 +40,7 @@ function TaskList({ tasks, setTasks, endpoint }) {
 
                         // Loop through the existing options in the datalist to check for the task
                         for (let option of categoryOptions.options) {
-                            if (option.value == category) {
+                            if (option.value === category) {
                                 taskExists = true;
                                 break;
                             }
