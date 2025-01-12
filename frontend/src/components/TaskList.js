@@ -142,8 +142,8 @@ function TaskList({ tasks, setTasks, endpoint }) {
                 <input 
                     ref={categoryInputRef}
                     list="category-options" 
-                    className="task-input" 
-                    placeholder="Enter category here"
+                    className="category-input"
+                    placeholder="Category"
                     value={newCategory}
                     onChange={handleCategoryChange}
                     onKeyDown={handleKeyDown}

@@ -142,6 +142,15 @@ input {
   background-color: var(--white);
 }
 
+.category-input {
+  padding: 8px;
+  border: 1px solid var(--white);
+  border-radius: 5px;
+  outline: none;
+  width: 100px;
+  background-color: var(--white);
+}
+
 button {
   padding: 8px 12px;
   background-color: var(--darker-green);
