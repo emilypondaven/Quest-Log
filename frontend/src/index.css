@@ -138,7 +138,7 @@ input {
   border: 1px solid var(--white);
   border-radius: 5px;
   outline: none;
-  width: 200px;
+  width: 175px;
   background-color: var(--white);
 }
 
@@ -147,7 +147,7 @@ input {
   border: 1px solid var(--white);
   border-radius: 5px;
   outline: none;
-  width: 100px;
+  width: 75px;
   background-color: var(--white);
 }
 
