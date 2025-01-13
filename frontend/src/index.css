@@ -229,11 +229,11 @@ nav a:hover {
 @media screen and (max-width: 390px) {
   .category-input {
     width: 50px;
-    font-size: 16px;
+    font-size: 18px;
   }
 
   .task-input {
     width: 150px;
-    font-size: 16px;
+    font-size: 18px;
   }
 }
