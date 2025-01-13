@@ -227,15 +227,11 @@ nav a:hover {
 
 /* iPhone 12: reduced size */
 @media screen and (max-width: 390px) {
-  ul {
-    max-height: 150px;
+  .category-input {
+    width: 50px;
   }
 
-  #sprite-button {
-    top: 120px;
-  }
-
-  #sprite-button:hover {
-    top: 118px;
+  .task-input {
+    width: 150px;
   }
 }
