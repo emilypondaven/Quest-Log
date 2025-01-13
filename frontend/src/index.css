@@ -224,3 +224,18 @@ nav a:hover {
   }
 }
 
+
+/* iPhone 12: reduced size */
+@media screen and (max-width: 390px) {
+  ul {
+    max-height: 150px;
+  }
+
+  #sprite-button {
+    top: 120px;
+  }
+
+  #sprite-button:hover {
+    top: 118px;
+  }
+}
